@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 class ProductController extends Controller
 {
+    public function getProductById($product_id){
+        $p=Product::where("id", $product_id)->first();
+        if($p){
+            return response()->json($p);
+        }else{
+            return response()->json(["error"=>"The product not found."]);
+        }
+    }
+
     public function getProducts(){
         $p=Product::OrderBy("id", "desc")->get();
         return response()->json($p);
