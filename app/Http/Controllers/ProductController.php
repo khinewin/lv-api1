@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 class ProductController extends Controller
 {
+    public function getProducts(){
+        $p=Product::OrderBy("id", "desc")->get();
+        return response()->json($p);
+    }
     public function createProduct(Request $request){
         $request->validate([
             'item_name'=>'required',
@@ -25,3 +29,5 @@ class ProductController extends Controller
 
     }
 }
+
+//khinewin/lv-api1
