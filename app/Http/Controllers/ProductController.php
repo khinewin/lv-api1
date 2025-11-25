@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 class ProductController extends Controller
 {
+    public function deleteProduct($product_id){
+        $p=Product::whereId($product_id)->first();
+        if($p){
+            $p->delete();
+            return response()->json(["msg"=>"The product has been deleted."]);
+        }else{
+            return response()->json(["error"=>"The product not found."]);
+        }
+    }
+
     public function getProductById($product_id){
         $p=Product::where("id", $product_id)->first();
         if($p){
