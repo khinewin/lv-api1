@@ -6,6 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 class ProductController extends Controller
 {
+    public function updateProduct(Request $request){
+        $id=$request->id;
+     //   return response()->json($id);
+        $p=Product::whereId($id)->first();
+        if($p){
+            $p->item_name=$request->item_name ?? $p->item_name ;
+            $p->cost=$request->cost ?? $p->cost;
+            $p->price=$request->price ?? $p->price;
+            $p->qty=$request->qty ?? $p->qty;
+            $p->update();
+            return response()->json(['msg'=>'The product has been updated.']);
+        }else{
+            return response()->json(["error"=>"The product not found."]);
+        }
+    }
     public function deleteProduct($product_id){
         $p=Product::whereId($product_id)->first();
         if($p){

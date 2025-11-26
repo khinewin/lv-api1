@@ -15,3 +15,5 @@ Route::get("/products/id/{product_id}", [ProductController::class, "getProductBy
 //delete product by id
 Route::delete("/products/id/{product_id}", [ProductController::class, "deleteProduct"]);
 
+//update product
+Route::put("/products", [ProductController::class, "updateProduct"]);
